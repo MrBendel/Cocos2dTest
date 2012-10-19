@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <tileoffset x="1" y="1"/>
+  <image source="../artwork/tmw_desert_spacing.png" width="266" height="266"/>
+  <tile id="37">
+   <properties>
+    <property name="Delay" value="1"/>
+    <property name="Next" value="38"/>
+   </properties>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="Delay" value="1"/>
+    <property name="Next" value="39"/>
+   </properties>
+  </tile>
+  <tile id="39">
+   <properties>
+    <property name="Delay" value="1"/>
+    <property name="Next" value="37"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1KsOgDAMheEpQAEKUMPx/o/IRNUEIdBsJ80vPt2zXpZTShkAAABSToEMwBPPHWXfge+4n5iYKz0A4EP5L+mdrXd9wAN7HJvifBUzAVG0uK+oN3wJZIjo774MxWimhnW9zcViVoE8b3tY99HzHT1ntBW7OUQyKbsBdggkNA==
+  </data>
+ </layer>
+ <objectgroup name="Objects" width="50" height="50">
+  <object name="SpawnPoint" x="817" y="1492" width="32" height="32"/>
+ </objectgroup>
+</map>
