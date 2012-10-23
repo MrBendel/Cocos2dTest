@@ -194,6 +194,12 @@
 		91E9A4B01631EFDC0000CEB1 /* SneakyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E9A49D1631EFDC0000CEB1 /* SneakyButton.m */; };
 		91E9A4B11631EFDC0000CEB1 /* SneakyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E9A49F1631EFDC0000CEB1 /* SneakyJoystick.m */; };
 		91E9A4B21631EFDC0000CEB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E9A4A11631EFDC0000CEB1 /* main.m */; };
+		91F873DA16359858000AF872 /* GameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91F873D716359858000AF872 /* GameLayer.mm */; };
+		91F873E716359968000AF872 /* TBXML+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F873E216359968000AF872 /* TBXML+Compression.m */; };
+		91F873E816359968000AF872 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F873E416359968000AF872 /* TBXML+HTTP.m */; };
+		91F873E916359968000AF872 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F873E616359968000AF872 /* TBXML.m */; };
+		91F8762F1635C7EB000AF872 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91F8762E1635C7EB000AF872 /* PhysicsSprite.mm */; };
+		91F8763B1635D987000AF872 /* BoxDebugLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91F8763A1635D987000AF872 /* BoxDebugLayer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -580,6 +586,19 @@
 		91E9A49F1631EFDC0000CEB1 /* SneakyJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystick.m; sourceTree = "<group>"; };
 		91E9A4A11631EFDC0000CEB1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		91E9A4B31631F0040000CEB1 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Cocos2DTest/Prefix.pch; sourceTree = SOURCE_ROOT; };
+		91F873D516359858000AF872 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		91F873D616359858000AF872 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		91F873D716359858000AF872 /* GameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameLayer.mm; sourceTree = "<group>"; };
+		91F873E116359968000AF872 /* TBXML+Compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+Compression.h"; sourceTree = "<group>"; };
+		91F873E216359968000AF872 /* TBXML+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+Compression.m"; sourceTree = "<group>"; };
+		91F873E316359968000AF872 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
+		91F873E416359968000AF872 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
+		91F873E516359968000AF872 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		91F873E616359968000AF872 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		91F8762D1635C7EB000AF872 /* PhysicsSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
+		91F8762E1635C7EB000AF872 /* PhysicsSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
+		91F876391635D987000AF872 /* BoxDebugLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxDebugLayer.h; sourceTree = "<group>"; };
+		91F8763A1635D987000AF872 /* BoxDebugLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoxDebugLayer.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1198,8 +1217,12 @@
 		91E9A4861631EFDC0000CEB1 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				91F876381635D987000AF872 /* debuglayer */,
+				91F873D416359858000AF872 /* gamelayer */,
 				91E9A4871631EFDC0000CEB1 /* hktmx */,
+				91F8762C1635C7EB000AF872 /* physicssprite */,
 				91E9A48E1631EFDC0000CEB1 /* sneakyjoystick */,
+				91F873E016359968000AF872 /* tbxml */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -1253,6 +1276,47 @@
 				91E9A4A11631EFDC0000CEB1 /* main.m */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		91F873D416359858000AF872 /* gamelayer */ = {
+			isa = PBXGroup;
+			children = (
+				91F873D516359858000AF872 /* Constants.h */,
+				91F873D616359858000AF872 /* GameLayer.h */,
+				91F873D716359858000AF872 /* GameLayer.mm */,
+			);
+			path = gamelayer;
+			sourceTree = "<group>";
+		};
+		91F873E016359968000AF872 /* tbxml */ = {
+			isa = PBXGroup;
+			children = (
+				91F873E116359968000AF872 /* TBXML+Compression.h */,
+				91F873E216359968000AF872 /* TBXML+Compression.m */,
+				91F873E316359968000AF872 /* TBXML+HTTP.h */,
+				91F873E416359968000AF872 /* TBXML+HTTP.m */,
+				91F873E516359968000AF872 /* TBXML.h */,
+				91F873E616359968000AF872 /* TBXML.m */,
+			);
+			path = tbxml;
+			sourceTree = "<group>";
+		};
+		91F8762C1635C7EB000AF872 /* physicssprite */ = {
+			isa = PBXGroup;
+			children = (
+				91F8762D1635C7EB000AF872 /* PhysicsSprite.h */,
+				91F8762E1635C7EB000AF872 /* PhysicsSprite.mm */,
+			);
+			path = physicssprite;
+			sourceTree = "<group>";
+		};
+		91F876381635D987000AF872 /* debuglayer */ = {
+			isa = PBXGroup;
+			children = (
+				91F876391635D987000AF872 /* BoxDebugLayer.h */,
+				91F8763A1635D987000AF872 /* BoxDebugLayer.mm */,
+			);
+			path = debuglayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1495,6 +1559,12 @@
 				91E9A4B01631EFDC0000CEB1 /* SneakyButton.m in Sources */,
 				91E9A4B11631EFDC0000CEB1 /* SneakyJoystick.m in Sources */,
 				91E9A4B21631EFDC0000CEB1 /* main.m in Sources */,
+				91F873DA16359858000AF872 /* GameLayer.mm in Sources */,
+				91F873E716359968000AF872 /* TBXML+Compression.m in Sources */,
+				91F873E816359968000AF872 /* TBXML+HTTP.m in Sources */,
+				91F873E916359968000AF872 /* TBXML.m in Sources */,
+				91F8762F1635C7EB000AF872 /* PhysicsSprite.mm in Sources */,
+				91F8763B1635D987000AF872 /* BoxDebugLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

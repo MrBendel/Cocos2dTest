@@ -1,3 +1,4 @@
+
 //
 //  TextureMapTest.m
 //  Cocos2DTest
@@ -8,6 +9,12 @@
 
 #import "TextureMapTest.h"
 
+#import "AppDelegate.h"
+#import "Constants.h"
+#import "PhysicsSprite.h"
+#import "BoxDebugLayer.h"
+#import "GameLayer.h"
+
 #import "SneakyButton.h"
 #import "SneakyJoystick.h"
 #import "SneakyJoystickSkinnedBase.h"
@@ -16,10 +23,24 @@
 
 #import "HKTMXTiledMap.h"
 
+
+enum {
+	kTagParentNode = 1,
+};
+
+
+#pragma mark - TextureMapTest
+
+@interface TextureMapTest (Private)
+-(void) initPhysics;
+-(void) addNewSpriteAtPosition:(CGPoint)p;
+-(void) createMenu;
+@end
+
 @implementation TextureMapTest
 
 /**
- * Helper class method that creates a Scene with the HelloWorldLayer as the only child.
+ * Helper class method that creates a Scene
  */
 + (CCScene *) scene {
 	CCScene *scene = [CCScene node];
@@ -37,15 +58,25 @@
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
+        // init physics
+        [self initPhysics];
+        
         _tileLayer = [CCNode node];
         [self addChild:_tileLayer];
         
         NSString* pathToTileMap = [[NSBundle mainBundle] pathForResource:@"tmw_desert" ofType:@"tmx" inDirectory:@"data/tilemaps"];
+                
+        // create tile map
         _tileMap = [HKTMXTiledMap tiledMapWithTMXFile:pathToTileMap];
         _background = [_tileMap layerNamed:@"Background"];
         [_background updateScale:0.7];
         
         [_tileLayer addChild:_tileMap z:0];
+        [_tileLayer addChild:_boxDebugLayer z:1];
+        
+        // create game layer
+        _gameLayer = [[GameLayer alloc] init];
+        [_gameLayer processPolygonObjectGroup:[_tileMap objectGroupNamed:@"Collision"] mapHeight:_tileMap.mapSize.height box2dWorld:_world];
         
         // get info for player center
         CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"Objects"];
@@ -95,8 +126,12 @@
 - (void)onEnterTransitionDidFinish {
     [super onEnterTransitionDidFinish];
     
-    [self schedule:@selector(update:) interval:1/60.f];
+    [self scheduleUpdate];
+    
+    CGSize s = [[CCDirector sharedDirector] winSize];
+    [self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
 }
+
 /**
  * register with touch dispatcher
  */
@@ -133,10 +168,103 @@
     [self setViewpointCenter:_player.position];
 }
 
-#pragma mark Update
+#pragma mark Private Methods
 
-- (void)update:(ccTime)dt {
+/**
+ *
+ */
+-(void) initPhysics {
+	
+	b2Vec2 gravity;
+	gravity.Set(0.0f, 0.0f);
+	_world = new b2World(gravity);
+	
+	
+	// Do we want to let bodies sleep?
+	_world->SetAllowSleeping(true);
+	
+	_world->SetContinuousPhysics(true);
+	
+    uint32 flags = 0;
+	flags += b2Draw::e_shapeBit;
+	//		flags += b2Draw::e_jointBit;
+	//		flags += b2Draw::e_aabbBit;
+	//		flags += b2Draw::e_pairBit;
+	//		flags += b2Draw::e_centerOfMassBit;
     
+    _boxDebugLayer = [[BoxDebugLayer alloc] initWithWorld:_world ptmRatio:PTM_RATIO flags:flags];
+}
+
+/**
+ *
+ */
+-(void) addNewSpriteAtPosition:(CGPoint)p
+{
+	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
+	CCNode *parent = [self getChildByTag:kTagParentNode];
+    
+    CCTexture2D *t = [[CCTextureCache sharedTextureCache] textureForKey:PNGPATH(@"Player")];
+	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:t rect:CGRectMake(0, 0, t.pixelsWide, t.pixelsHigh)];
+	[parent addChild:sprite];
+	
+	sprite.position = ccp( p.x, p.y);
+	
+	// Define the dynamic body.
+	//Set up a 1m squared box in the physics _world
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+	b2Body *body = _world->CreateBody(&bodyDef);
+	
+	// Define another box shape for our dynamic body.
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
+	
+	// Define the dynamic body fixture.
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.3f;
+	body->CreateFixture(&fixtureDef);
+	
+	[sprite setPhysicsBody:body];
+    
+    [self addChild:sprite z:1000];
+}
+
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//Add a new body/atlas sprite at the touched location
+	for( UITouch *touch in touches ) {
+		CGPoint location = [touch locationInView: [touch view]];
+		
+		location = [[CCDirector sharedDirector] convertToGL: location];
+		
+		[self addNewSpriteAtPosition: location];
+	}
+}
+
+#pragma mark Update Cycles
+
+/**
+ *
+ */
+-(void) update: (ccTime) dt
+{
+	//It is recommended that a fixed time step is used with Box2D for stability
+	//of the simulation, however, we are using a variable time step here.
+	//You need to make an informed choice, the following URL is useful
+	//http://gafferongames.com/game-physics/fix-your-timestep/
+	
+	int32 velocityIterations = 8;
+	int32 positionIterations = 1;
+	
+	// Instruct the _world to perform a single step of simulation. It is
+	// generally best to keep the time step and iterations fixed.
+	_world->Step(dt, velocityIterations, positionIterations);
+    
+    // ------ ------ ------ ------ ------ ------ ------ ------
+    // joystick updates
     if (fabsf(_leftJoystick.velocity.x + _leftJoystick.velocity.y) > 0.0f) {
         CGPoint pos = _player.position;
         CGPoint vel = ccpMult(_leftJoystick.velocity, 20.0f);
@@ -147,10 +275,7 @@
         _targetScale = 1;
     }
     
-    
-    
     _currentScale += (_targetScale - _tileLayer.scale) * 0.05;
-//    _tileLayer.scale = _currentScale;
 }
 
 #pragma mark Touches Lifecycle
@@ -201,6 +326,11 @@
  */
 - (void)dealloc {
     [_tileMap release];
+    
+    delete _world;
+	_world = NULL;
+    
+    [_boxDebugLayer release];
     
     [super dealloc];
 }

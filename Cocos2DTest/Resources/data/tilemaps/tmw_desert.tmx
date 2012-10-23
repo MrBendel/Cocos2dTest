@@ -3,6 +3,18 @@
  <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <tileoffset x="1" y="1"/>
   <image source="../artwork/tmw_desert_spacing.png" width="266" height="266"/>
+  <tile id="30">
+   <properties>
+    <property name="Delay" value="1"/>
+    <property name="Next" value="31"/>
+   </properties>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="Delay" value="1"/>
+    <property name="Next" value="30"/>
+   </properties>
+  </tile>
   <tile id="37">
    <properties>
     <property name="Delay" value="1"/>
@@ -24,10 +36,14 @@
  </tileset>
  <layer name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt1KsOgDAMheEpQAEKUMPx/o/IRNUEIdBsJ80vPt2zXpZTShkAAABSToEMwBPPHWXfge+4n5iYKz0A4EP5L+mdrXd9wAN7HJvifBUzAVG0uK+oN3wJZIjo774MxWimhnW9zcViVoE8b3tY99HzHT1ntBW7OUQyKbsBdggkNA==
+   eJzt1MsKwkAMheFRQS2C99uq7nz/RzSLCBJQaA2d0/IvPsp0kZzOZNqWUloAAABIeQhkAH7JnFHmHeiP+zNNnCt7ACCH8r+kdrba/YEMzPG0KZ6vYiaM08zMg4VArq4aczZHdzGbnrWGuF/fejQhd1yre/rzYE4f7+Ma3fw7k0uzcusB+2bbmp3bj2Df3zVinczvqHlGV3Nzd5FMyl6x2iK6
   </data>
  </layer>
  <objectgroup name="Objects" width="50" height="50">
-  <object name="SpawnPoint" x="817" y="1492" width="32" height="32"/>
+  <object name="SpawnPoint" x="794" y="1472" width="80" height="72"/>
+ </objectgroup>
+ <objectgroup name="Collision" width="50" height="50">
+  <object x="1798" y="520"/>
+  <object x="2" y="1446" width="284" height="152"/>
  </objectgroup>
 </map>

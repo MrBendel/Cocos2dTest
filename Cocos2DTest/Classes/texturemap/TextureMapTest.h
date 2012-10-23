@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Box2D.h"
 
+@class BoxDebugLayer, GameLayer;
 @class HKTMXTiledMap, HKTMXLayer;
 @class SneakyJoystick, SneakyButton;
 
@@ -17,6 +19,9 @@
     
 //    CCTMXTiledMap *_tileMap;
 //    CCTMXLayer *_background;
+    b2World *_world;				// strong ref
+    BoxDebugLayer *_boxDebugLayer;
+    GameLayer *_gameLayer;
     
     HKTMXTiledMap *_tileMap;
     HKTMXLayer *_background;
