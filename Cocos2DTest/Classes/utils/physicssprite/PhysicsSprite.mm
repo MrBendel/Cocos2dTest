@@ -14,6 +14,11 @@
 #pragma mark - PhysicsSprite
 @implementation PhysicsSprite
 
+@synthesize body = body_;
+
+/**
+ * set the physics body of the sprite
+ */
 -(void) setPhysicsBody:(b2Body *)body
 {
 	body_ = body;

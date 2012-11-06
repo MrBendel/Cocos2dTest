@@ -23,17 +23,11 @@
 
 #import "HKTMXTiledMap.h"
 
-
-enum {
-	kTagParentNode = 1,
-};
-
-
 #pragma mark - TextureMapTest
 
 @interface TextureMapTest (Private)
 -(void) initPhysics;
--(void) addNewSpriteAtPosition:(CGPoint)p;
+-(PhysicsSprite*) createNewSpriteAtPosition:(CGPoint)p;
 -(void) createMenu;
 @end
 
@@ -86,10 +80,8 @@ enum {
         int x = [[spawnPoint valueForKey:@"x"] intValue];
         int y = [[spawnPoint valueForKey:@"y"] intValue];
         
-        CCTexture2D *t = [[CCTextureCache sharedTextureCache] textureForKey:PNGPATH(@"Player")];
-        _player = [CCSprite spriteWithTexture:t];
-        [_player setPosition:ccp(x,y)];
-        [_tileLayer addChild:_player z:1];
+        _player = [self createNewSpriteAtPosition:ccp(x,y)];
+        [_tileLayer addChild:_player];
         
         [self setViewpointCenter:_player.position];
         
@@ -128,8 +120,8 @@ enum {
     
     [self scheduleUpdate];
     
-    CGSize s = [[CCDirector sharedDirector] winSize];
-    [self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
+//    CGSize s = [[CCDirector sharedDirector] winSize];
+//    [self createNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
 }
 
 /**
@@ -146,13 +138,13 @@ enum {
  * set the viewpoint to center on a position
  */
 - (void)setViewpointCenter:(CGPoint) position {
-    
+
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     int x = position.x;// MAX(position.x, winSize.width / 2);
     int y = position.y;// MAX(position.y, winSize.height / 2);
-//    x = MIN(x, (_tileMap.mapSize.width * _tileMap.tileSize.width) - winSize.width / 2);
-//    y = MIN(y, (_tileMap.mapSize.height * _tileMap.tileSize.height) - winSize.height/2);
+    x = MIN(x, (_tileMap.mapSize.width * _tileMap.tileSize.width) - winSize.width / 2);
+    y = MIN(y, (_tileMap.mapSize.height * _tileMap.tileSize.height) - winSize.height/2);
     CGPoint actualPosition = ccp(x, y);
     
     CGPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
@@ -164,7 +156,7 @@ enum {
 }
 
 - (void)setPlayerPosition:(CGPoint) position {
-    _player.position = position;
+    _player.position = ccp(position.x, position.y);
     [self setViewpointCenter:_player.position];
 }
 
@@ -198,14 +190,12 @@ enum {
 /**
  *
  */
--(void) addNewSpriteAtPosition:(CGPoint)p
+-(PhysicsSprite*) createNewSpriteAtPosition:(CGPoint)p
 {
 	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
-	CCNode *parent = [self getChildByTag:kTagParentNode];
     
     CCTexture2D *t = [[CCTextureCache sharedTextureCache] textureForKey:PNGPATH(@"Player")];
 	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:t rect:CGRectMake(0, 0, t.pixelsWide, t.pixelsHigh)];
-	[parent addChild:sprite];
 	
 	sprite.position = ccp( p.x, p.y);
 	
@@ -229,7 +219,7 @@ enum {
 	
 	[sprite setPhysicsBody:body];
     
-    [self addChild:sprite z:1000];
+    return sprite;
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -240,7 +230,7 @@ enum {
 		
 		location = [[CCDirector sharedDirector] convertToGL: location];
 		
-		[self addNewSpriteAtPosition: location];
+		[self createNewSpriteAtPosition: location];
 	}
 }
 

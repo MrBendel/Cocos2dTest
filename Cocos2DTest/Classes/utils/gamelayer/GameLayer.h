@@ -36,4 +36,8 @@
     
 - (void)processPolygonObjectGroup:(CCTMXObjectGroup*)group mapHeight:(int)mapHeight box2dWorld:(b2World*)world;
 
+- (void)createPolygonShapeWithPoint:(NSArray *)points atOrigin:(CGPoint)origin;
+
+
+
 @end

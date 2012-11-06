@@ -59,12 +59,10 @@
         int width = [[waypoint objectForKey:@"width"] intValue];
         int height = [[waypoint objectForKey:@"height"] intValue];
         
-        // Define the static container body, which will provide the collisions at screen borders.
-        b2BodyDef screenBorderDef;
-        screenBorderDef.position.Set(x/PTM_RATIO, y/PTM_RATIO);
-        b2Body* screenBorderBody = world->CreateBody(&screenBorderDef);
-        
-        if (polygonPoints) {
+        if (polygonPoints) { // polygon strip
+            b2BodyDef screenBorderDef;
+            screenBorderDef.position.Set(x/PTM_RATIO, y/PTM_RATIO);
+            b2Body* screenBorderBody = world->CreateBody(&screenBorderDef);            
             // Polyline points are separated by a space, get an array of each set of points.
             NSArray *points = [polygonPoints componentsSeparatedByString:@" "];
             
@@ -85,9 +83,25 @@
             chainDef.friction = 0.69f;
             chainDef.restitution = 0.0f;
             screenBorderBody->CreateFixture(&chainDef);
-        } else if (width and height) {
+        } else if (width and height) { // box with defined width and height
+            b2BodyDef screenBorderDef;
+            screenBorderDef.position.Set((x+width/2)/PTM_RATIO, (y+height/2)/PTM_RATIO);            
+            b2Body* screenBorderBody = world->CreateBody(&screenBorderDef);
             b2PolygonShape dynamicBox;
-            dynamicBox.SetAsBox((width/CC_CONTENT_SCALE_FACTOR()) / PTM_RATIO, (height/CC_CONTENT_SCALE_FACTOR()) / PTM_RATIO);
+            dynamicBox.SetAsBox((width/CC_CONTENT_SCALE_FACTOR())/2/PTM_RATIO, (height/CC_CONTENT_SCALE_FACTOR())/2/PTM_RATIO);
+            b2FixtureDef fixtureDef;
+            fixtureDef.shape = &dynamicBox;
+            fixtureDef.density = 1.0f;
+            fixtureDef.friction = 0.69f;
+            screenBorderBody->CreateFixture(&fixtureDef);
+        } else { // default box, just x & y
+            width = 20;
+            height = 20;
+            b2BodyDef screenBorderDef;
+            screenBorderDef.position.Set(x/PTM_RATIO, y/PTM_RATIO);
+            b2Body* screenBorderBody = world->CreateBody(&screenBorderDef);
+            b2PolygonShape dynamicBox;
+            dynamicBox.SetAsBox((width/CC_CONTENT_SCALE_FACTOR())/2/PTM_RATIO, (height/CC_CONTENT_SCALE_FACTOR())/2/PTM_RATIO);
             b2FixtureDef fixtureDef;
             fixtureDef.shape = &dynamicBox;
             fixtureDef.density = 1.0f;

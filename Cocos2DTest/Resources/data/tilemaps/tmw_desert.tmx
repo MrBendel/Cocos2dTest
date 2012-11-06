@@ -44,6 +44,24 @@
  </objectgroup>
  <objectgroup name="Collision" width="50" height="50">
   <object x="1798" y="520"/>
-  <object x="2" y="1446" width="284" height="152"/>
+  <object x="784" y="1296" width="33" height="96"/>
+  <object x="914" y="1298" width="30" height="94"/>
+  <object x="814" y="1299" width="104" height="31"/>
+  <object x="625" y="1518"/>
+  <object x="657" y="1520"/>
+  <object x="978" y="1553"/>
+  <object x="720" y="1396"/>
+  <object x="591" y="1358"/>
+  <object x="272" y="1455"/>
+  <object x="80" y="1520"/>
+  <object x="880" y="1200"/>
+  <object x="1393" y="1521"/>
+  <object x="1233" y="1456"/>
+  <object x="1394" y="1328"/>
+  <object x="1297" y="1168"/>
+  <object x="-116" y="-50" width="116" height="1672"/>
+  <object x="-78" y="1602" width="1732" height="136"/>
+  <object x="1602" y="-134" width="206" height="1808"/>
+  <object x="-42" y="-102" width="1726" height="106"/>
  </objectgroup>
 </map>
