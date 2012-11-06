@@ -40,7 +40,7 @@
   </data>
  </layer>
  <objectgroup name="Objects" width="50" height="50">
-  <object name="SpawnPoint" x="794" y="1472" width="80" height="72"/>
+  <object name="SpawnPoint" x="99" y="1514" width="80" height="72"/>
  </objectgroup>
  <objectgroup name="Collision" width="50" height="50">
   <object x="1798" y="520"/>

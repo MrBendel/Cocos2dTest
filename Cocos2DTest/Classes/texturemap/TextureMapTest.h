@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 
+@class CarPhysicsSprite;
 @class BoxDebugLayer, GameLayer;
 @class HKTMXTiledMap, HKTMXLayer;
 @class SneakyJoystick, SneakyButton;
@@ -26,7 +27,7 @@
     HKTMXTiledMap *_tileMap;
     HKTMXLayer *_background;
     
-    CCSprite *_player;
+    CarPhysicsSprite *_player;
     
     SneakyJoystick *_leftJoystick;
 	SneakyButton *_rightButton;

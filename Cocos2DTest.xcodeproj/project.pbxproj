@@ -194,6 +194,7 @@
 		91E9A4B01631EFDC0000CEB1 /* SneakyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E9A49D1631EFDC0000CEB1 /* SneakyButton.m */; };
 		91E9A4B11631EFDC0000CEB1 /* SneakyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E9A49F1631EFDC0000CEB1 /* SneakyJoystick.m */; };
 		91E9A4B21631EFDC0000CEB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E9A4A11631EFDC0000CEB1 /* main.m */; };
+		91ED751C164965DF0047131C /* CarPhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91ED751B164965DF0047131C /* CarPhysicsSprite.mm */; };
 		91F873DA16359858000AF872 /* GameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91F873D716359858000AF872 /* GameLayer.mm */; };
 		91F873E716359968000AF872 /* TBXML+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F873E216359968000AF872 /* TBXML+Compression.m */; };
 		91F873E816359968000AF872 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F873E416359968000AF872 /* TBXML+HTTP.m */; };
@@ -586,6 +587,8 @@
 		91E9A49F1631EFDC0000CEB1 /* SneakyJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystick.m; sourceTree = "<group>"; };
 		91E9A4A11631EFDC0000CEB1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		91E9A4B31631F0040000CEB1 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Cocos2DTest/Prefix.pch; sourceTree = SOURCE_ROOT; };
+		91ED751A164965DF0047131C /* CarPhysicsSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarPhysicsSprite.h; sourceTree = "<group>"; };
+		91ED751B164965DF0047131C /* CarPhysicsSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CarPhysicsSprite.mm; sourceTree = "<group>"; };
 		91F873D516359858000AF872 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		91F873D616359858000AF872 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		91F873D716359858000AF872 /* GameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameLayer.mm; sourceTree = "<group>"; };
@@ -1306,6 +1309,8 @@
 			children = (
 				91F8762D1635C7EB000AF872 /* PhysicsSprite.h */,
 				91F8762E1635C7EB000AF872 /* PhysicsSprite.mm */,
+				91ED751A164965DF0047131C /* CarPhysicsSprite.h */,
+				91ED751B164965DF0047131C /* CarPhysicsSprite.mm */,
 			);
 			path = physicssprite;
 			sourceTree = "<group>";
@@ -1565,6 +1570,7 @@
 				91F873E916359968000AF872 /* TBXML.m in Sources */,
 				91F8762F1635C7EB000AF872 /* PhysicsSprite.mm in Sources */,
 				91F8763B1635D987000AF872 /* BoxDebugLayer.mm in Sources */,
+				91ED751C164965DF0047131C /* CarPhysicsSprite.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

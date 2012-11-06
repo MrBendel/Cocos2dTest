@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "PhysicsSprite.h"
+#import "CarPhysicsSprite.h"
 #import "BoxDebugLayer.h"
 #import "GameLayer.h"
 
@@ -27,7 +28,7 @@
 
 @interface TextureMapTest (Private)
 -(void) initPhysics;
--(PhysicsSprite*) createNewSpriteAtPosition:(CGPoint)p;
+-(CarPhysicsSprite*) createNewSpriteAtPosition:(CGPoint)p;
 -(void) createMenu;
 @end
 
@@ -156,7 +157,6 @@
 }
 
 - (void)setPlayerPosition:(CGPoint) position {
-    _player.position = ccp(position.x, position.y);
     [self setViewpointCenter:_player.position];
 }
 
@@ -190,12 +190,12 @@
 /**
  *
  */
--(PhysicsSprite*) createNewSpriteAtPosition:(CGPoint)p
+-(CarPhysicsSprite*) createNewSpriteAtPosition:(CGPoint)p
 {
 	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
     
     CCTexture2D *t = [[CCTextureCache sharedTextureCache] textureForKey:PNGPATH(@"Player")];
-	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:t rect:CGRectMake(0, 0, t.pixelsWide, t.pixelsHigh)];
+	CarPhysicsSprite *sprite = [CarPhysicsSprite spriteWithTexture:t rect:CGRectMake(0, 0, t.pixelsWide, t.pixelsHigh)];
 	
 	sprite.position = ccp( p.x, p.y);
 	
