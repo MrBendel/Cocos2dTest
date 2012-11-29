@@ -59,7 +59,7 @@
         _tileLayer = [CCNode node];
         [self addChild:_tileLayer];
         
-        NSString* pathToTileMap = [[NSBundle mainBundle] pathForResource:@"tmw_desert" ofType:@"tmx" inDirectory:@"data/tilemaps"];
+        NSString* pathToTileMap = [[NSBundle mainBundle] pathForResource:@"tmw_desert2" ofType:@"tmx" inDirectory:@"data/tilemaps"];
                 
         // create tile map
         _tileMap = [HKTMXTiledMap tiledMapWithTMXFile:pathToTileMap];
@@ -208,7 +208,7 @@
 	
 	// Define another box shape for our dynamic body.
 	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
+	dynamicBox.SetAsBox(t.pixelsWide / 2 / PTM_RATIO, t.pixelsHigh / 2 / PTM_RATIO);//These are half width and half height
 	
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -254,12 +254,14 @@
 	_world->Step(dt, velocityIterations, positionIterations);
     
     // ------ ------ ------ ------ ------ ------ ------ ------
+    // orient the world
+    [self setViewpointCenter:_player.position];
+    
     // joystick updates
     if (fabsf(_leftJoystick.velocity.x + _leftJoystick.velocity.y) > 0.0f) {
-        CGPoint pos = _player.position;
-        CGPoint vel = ccpMult(_leftJoystick.velocity, 20.0f);
-        [self setPlayerPosition:ccp(pos.x + vel.x, pos.y + vel.y)];
-        
+        [_player updateDrive:_leftJoystick.velocity.y];
+        [_player updateTurn:_leftJoystick.velocity.x];
+       
         _targetScale = 0.7;
     } else {
         _targetScale = 1;
